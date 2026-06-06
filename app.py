@@ -19,6 +19,11 @@ def derivative_integral():
     return render_template("derivative_integral.html")
 
 
+@app.route("/differential")
+def differential():
+    return render_template("differential.html")
+
+
 @app.route("/extrema")
 def extrema():
     return render_template("extrema.html")

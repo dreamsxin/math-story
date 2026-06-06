@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>微分教程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='differential.css') }}"
+    />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  </head>
+  <body>
+    <main class="lesson-shell">
+      <header class="lesson-header">
+        <nav class="top-links">
+          <a href="/">返回故事机</a>
+          <a href="/derivative-integral">求导教程</a>
+          <a href="/extrema">极值教程</a>
+        </nav>
+        <div>
+          <p class="eyebrow">应用教程</p>
+          <h1>微分：用一点点变化预测结果</h1>
+          <p>
+            求导告诉我们“现在变化得多快”；微分接着问：如果输入只动一点点，输出大约会跟着动多少？
+          </p>
+        </div>
+      </header>
+
+      <section class="lesson-layout">
+        <aside class="lesson-nav">
+          <p class="panel-title">六个故事</p>
+          <div id="step-buttons" class="step-buttons">
+            <button class="step-button active" data-step="input">1. 输入变一点点</button>
+            <button class="step-button" data-step="realChange">2. 输出跟着变多少</button>
+            <button class="step-button" data-step="tangentGuess">3. 用切线来猜</button>
+            <button class="step-button" data-step="smallerDx">4. dx 越小，猜得越准</button>
+            <button class="step-button" data-step="squareArea">5. 边长多一点</button>
+            <button class="step-button" data-step="warning">6. 什么时候不能太相信</button>
+          </div>
+        </aside>
+
+        <section class="graph-panel">
+          <div class="graph-header">
+            <div>
+              <p class="panel-title">GeoGebra 画面</p>
+              <h2 id="step-title">输入变一点点</h2>
+            </div>
+            <span id="step-chip" class="step-chip">dx</span>
+          </div>
+          <div id="ggb-differential" class="ggb-frame"></div>
+        </section>
+
+        <aside class="lesson-side">
+          <section class="lesson-card">
+            <p class="panel-title">这一幕要明白</p>
+            <p id="step-description" class="copy"></p>
+          </section>
+
+          <section class="lesson-card formula-card">
+            <p class="panel-title">一句公式</p>
+            <p id="formula-line" class="formula-line"></p>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">拖动参数</p>
+            <div id="control-fields" class="control-fields"></div>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">观察数字</p>
+            <div id="metrics" class="metrics"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script
+      src="{{ url_for('static', filename='differential.js') }}"
+      defer
+    ></script>
+  </body>
+</html>
