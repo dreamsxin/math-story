@@ -34,6 +34,30 @@ const stepDefinitions = {
     ],
     mode: "limitSlope",
   },
+  squareLimit: {
+    title: "手算 x² 的导数",
+    chip: "展开再约掉 h",
+    description:
+      "以 g(x)=x² 为例，把定义式真的算一遍。先展开 (x+h)²，再减去 x²，最后除以 h。注意：不能一开始令 h=0，要先把能约掉的 h 约掉。",
+    formula: "[(x+h)²-x²]/h = (2xh+h²)/h = 2x+h，h→0 后得到 2x。",
+    controls: [
+      { key: "x0", label: "观察位置 x", min: -3, max: 3, step: 0.1, value: 1 },
+      { key: "h", label: "横向小步 h", min: 0.05, max: 2, step: 0.05, value: 1 },
+    ],
+    mode: "squareLimit",
+  },
+  exampleLimit: {
+    title: "手算 0.25x²+1",
+    chip: "常数会抵消",
+    description:
+      "再算首页常用的函数 g(x)=0.25x²+1。代入定义式后，两个 +1 会相互抵消，所以常数项的导数是 0。",
+    formula: "[g(x+h)-g(x)]/h = 0.5x+0.25h，h→0 后得到 g'(x)=0.5x。",
+    controls: [
+      { key: "x0", label: "观察位置 x", min: -3, max: 3, step: 0.1, value: 1 },
+      { key: "h", label: "横向小步 h", min: 0.05, max: 2, step: 0.05, value: 1 },
+    ],
+    mode: "exampleLimit",
+  },
   power: {
     title: "幂函数规则",
     chip: "xⁿ 怎么求导",
@@ -171,6 +195,40 @@ function renderStep() {
 }
 
 function buildCommands(mode, values) {
+  if (mode === "squareLimit") {
+    return [
+      `x0 = ${values.x0}`,
+      `h = ${values.h}`,
+      "g(x) = x^2",
+      "dg(x) = 2x",
+      "P = (x0, g(x0))",
+      "B = (x0 + h, g(x0 + h))",
+      "SecantLine = Line(P, B)",
+      "TangentLine = Tangent(P, g)",
+      "AverageSlope = Slope(SecantLine)",
+      "ExpandedSlope = 2x0 + h",
+      "LimitSlope = 2x0",
+      "SlopeGap = abs(AverageSlope - LimitSlope)",
+    ];
+  }
+
+  if (mode === "exampleLimit") {
+    return [
+      `x0 = ${values.x0}`,
+      `h = ${values.h}`,
+      "g(x) = 0.25x^2 + 1",
+      "dg(x) = 0.5x",
+      "P = (x0, g(x0))",
+      "B = (x0 + h, g(x0 + h))",
+      "SecantLine = Line(P, B)",
+      "TangentLine = Tangent(P, g)",
+      "AverageSlope = Slope(SecantLine)",
+      "ExpandedSlope = 0.5x0 + 0.25h",
+      "LimitSlope = 0.5x0",
+      "SlopeGap = abs(AverageSlope - LimitSlope)",
+    ];
+  }
+
   if (mode === "average" || mode === "limitSlope") {
     return [
       `x0 = ${values.x0}`,
@@ -364,6 +422,13 @@ function renderMetrics(mode) {
       { label: "平均变化率", value: safeValue(api, "AverageSlope") },
       { label: "导函数值", value: safeValue(api, "InstantSlope") },
       { label: "两者差多少", value: safeValue(api, "SlopeGap") },
+    );
+  } else if (mode === "squareLimit" || mode === "exampleLimit") {
+    metrics.push(
+      { label: "割线斜率", value: safeValue(api, "AverageSlope") },
+      { label: "展开后公式值", value: safeValue(api, "ExpandedSlope") },
+      { label: "h→0 后的导数值", value: safeValue(api, "LimitSlope") },
+      { label: "还差多少", value: safeValue(api, "SlopeGap") },
     );
   } else if (mode === "reverse" || mode === "constant" || mode === "check") {
     metrics.push(
