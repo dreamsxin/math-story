@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>求导与不定积分教程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='derivative-integral.css') }}"
+    />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  </head>
+  <body>
+    <main class="lesson-shell">
+      <header class="lesson-header">
+        <nav class="top-links">
+          <a href="/">返回故事机</a>
+          <a href="/area-limit">面积极限教程</a>
+        </nav>
+        <div>
+          <p class="eyebrow">规则教程</p>
+          <h1>求导和不定积分，是一对反向操作</h1>
+          <p>
+            这节课只围绕多项式：先学怎样从函数得到变化率，再学怎样从变化率反推出原函数。
+          </p>
+        </div>
+      </header>
+
+      <section class="lesson-layout">
+        <aside class="lesson-nav">
+          <p class="panel-title">六个故事</p>
+          <div id="step-buttons" class="step-buttons">
+            <button class="step-button active" data-step="meaning">1. 求导在问什么</button>
+            <button class="step-button" data-step="power">2. 幂函数规则</button>
+            <button class="step-button" data-step="sum">3. 多项式逐项算</button>
+            <button class="step-button" data-step="reverse">4. 反过来找 F</button>
+            <button class="step-button" data-step="constant">5. 为什么有 +C</button>
+            <button class="step-button" data-step="check">6. 再求导检查</button>
+          </div>
+        </aside>
+
+        <section class="graph-panel">
+          <div class="graph-header">
+            <div>
+              <p class="panel-title">GeoGebra 画面</p>
+              <h2 id="step-title">求导在问什么</h2>
+            </div>
+            <span id="step-chip" class="step-chip">变化率</span>
+          </div>
+          <div id="ggb-derivative-integral" class="ggb-frame"></div>
+        </section>
+
+        <aside class="lesson-side">
+          <section class="lesson-card">
+            <p class="panel-title">这一幕要明白</p>
+            <p id="step-description" class="copy"></p>
+          </section>
+
+          <section class="lesson-card formula-card">
+            <p class="panel-title">当前公式</p>
+            <p id="formula-line" class="formula-line"></p>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">拖动参数</p>
+            <div id="control-fields" class="control-fields"></div>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">观察数字</p>
+            <div id="metrics" class="metrics"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script
+      src="{{ url_for('static', filename='derivative-integral.js') }}"
+      defer
+    ></script>
+  </body>
+</html>

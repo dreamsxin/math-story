@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>面积极限教程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='area-limit.css') }}"
+    />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  </head>
+  <body>
+    <main class="lesson-shell">
+      <header class="lesson-header">
+        <a class="back-link" href="/">返回故事机</a>
+        <div>
+          <p class="eyebrow">单独教程</p>
+          <h1>无限变细时，面积到底怎么算？</h1>
+          <p>
+            我们用同一个函数
+            <strong>f(x)=0.25x²+1</strong>
+            ，拆成 5 个小故事，看清楚从“矩形估算”到“积分精确值”的路。
+          </p>
+        </div>
+      </header>
+
+      <section class="lesson-layout">
+        <aside class="lesson-nav">
+          <p class="panel-title">五个故事</p>
+          <div id="step-buttons" class="step-buttons">
+            <button class="step-button active" data-step="rectangles">1. 先用矩形拼</button>
+            <button class="step-button" data-step="error">2. 误差从哪里来</button>
+            <button class="step-button" data-step="limit">3. 趋近 0 是什么</button>
+            <button class="step-button" data-step="antiderivative">4. 不数矩形了</button>
+            <button class="step-button" data-step="formula">5. F(b)-F(a)</button>
+          </div>
+        </aside>
+
+        <section class="graph-panel">
+          <div class="graph-header">
+            <div>
+              <p class="panel-title">GeoGebra 画面</p>
+              <h2 id="step-title">先用矩形拼</h2>
+            </div>
+            <span id="step-chip" class="step-chip">有限估算</span>
+          </div>
+          <div id="ggb-area-limit" class="ggb-frame"></div>
+        </section>
+
+        <aside class="lesson-side">
+          <section class="lesson-card">
+            <p class="panel-title">这一幕要明白</p>
+            <p id="step-description" class="copy"></p>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">拖动参数</p>
+            <div id="control-fields" class="control-fields"></div>
+          </section>
+
+          <section class="lesson-card">
+            <p class="panel-title">观察数字</p>
+            <div id="metrics" class="metrics"></div>
+          </section>
+
+          <section class="lesson-card formula-card">
+            <p class="panel-title">关键句</p>
+            <p id="key-line" class="key-line"></p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script
+      src="{{ url_for('static', filename='area-limit.js') }}"
+      defer
+    ></script>
+  </body>
+</html>

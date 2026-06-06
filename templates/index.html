@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>给小朋友看的微积分故事机</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">GeoGebra + Python</p>
+          <h1>给小朋友看的微积分故事机</h1>
+          <p class="hero-text">
+            不先讲难词，先讲感觉。我们用山坡、小方块、雨水桶、骑车旅行和曲线面积，去理解“哪里更陡”“很多小东西加起来会怎样”“现在快不快，会让总量怎么变”。
+          </p>
+          <div class="lesson-links">
+            <a class="lesson-link" href="/area-limit">进入“面积极限”单独教程</a>
+            <a class="lesson-link" href="/derivative-integral">进入“求导与不定积分”教程</a>
+          </div>
+        </div>
+        <div class="hero-tip">
+          <p class="tip-title">这节课只做五件事</p>
+          <ul>
+            <li>看一看山坡哪里陡，哪里平</li>
+            <li>把很多小块块拼成一整片</li>
+            <li>看雨下得快不快，水桶就涨得快不快</li>
+            <li>把一路上的速度加起来，算走了多远</li>
+            <li>用积分计算曲线和横轴围成的面积</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="sidebar">
+          <div class="card">
+            <p class="small-title">故事选择</p>
+            <div class="story-list" id="scene-buttons">
+              <button class="story-button active" data-scene="hill">1. 小蜗牛爬山</button>
+              <button class="story-button" data-scene="tiles">2. 小块块拼草地</button>
+              <button class="story-button" data-scene="rain">3. 下雨装水桶</button>
+              <button class="story-button" data-scene="bike">4. 骑车去公园</button>
+              <button class="story-button" data-scene="area">5. 曲线下面积</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <p class="small-title">拖一拖试试看</p>
+            <div id="control-fields" class="control-fields"></div>
+            <button id="reset-view" class="reset-button">回到这个故事的开始</button>
+          </div>
+
+          <div class="card voice-card">
+            <p class="small-title">一句大白话</p>
+            <p id="kid-line" class="kid-line"></p>
+          </div>
+        </aside>
+
+        <section class="stage">
+          <div class="stage-card">
+            <div class="stage-header">
+              <div>
+                <p class="small-title">故事画面</p>
+                <h2 id="scene-title">小蜗牛爬山</h2>
+              </div>
+              <div class="scene-chip" id="scene-chip">先看感觉</div>
+            </div>
+            <div id="ggb-element" class="ggb-frame"></div>
+          </div>
+        </section>
+
+        <aside class="sidebar">
+          <div class="card">
+            <p class="small-title">现在看到了什么</p>
+            <p id="scene-description" class="body-copy"></p>
+          </div>
+
+          <div class="card">
+            <p class="small-title">观察小卡片</p>
+            <div id="metrics" class="metrics"></div>
+          </div>
+
+          <div class="card">
+            <p class="small-title">可以这样问孩子</p>
+            <ul id="scene-prompts" class="prompt-list"></ul>
+          </div>
+
+          <div class="card grownup-card">
+            <p class="small-title">给大人的翻译</p>
+            <p id="grownup-note" class="body-copy"></p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script
+      src="{{ url_for('static', filename='app.js') }}"
+      defer
+    ></script>
+  </body>
+</html>

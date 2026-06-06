@@ -1,0 +1,320 @@
+:root {
+  --bg-top: #fff4d6;
+  --bg-bottom: #dff3ff;
+  --card: rgba(255, 253, 248, 0.94);
+  --card-strong: rgba(255, 251, 240, 0.98);
+  --ink: #1f3251;
+  --muted: #58708a;
+  --orange: #f08b37;
+  --green: #28a06f;
+  --blue: #2d7dd2;
+  --yellow: #ffd166;
+  --border: rgba(31, 50, 81, 0.1);
+  --shadow: 0 20px 48px rgba(60, 91, 129, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans SC", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(255, 209, 102, 0.45), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(45, 125, 210, 0.2), transparent 32%),
+    linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+}
+
+.page {
+  width: min(1420px, calc(100vw - 28px));
+  margin: 0 auto;
+  padding: 22px 0 34px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.hero-copy,
+.hero-tip,
+.card,
+.stage-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.hero-copy,
+.hero-tip,
+.card {
+  padding: 22px;
+}
+
+.kicker,
+.small-title {
+  margin: 0 0 10px;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  color: var(--green);
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 1;
+}
+
+.hero-text,
+.body-copy,
+.hero-tip li,
+.prompt-list li {
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.lesson-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.lesson-link {
+  display: inline-flex;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #eef8ff;
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 800;
+  box-shadow: inset 0 0 0 1px rgba(45, 125, 210, 0.14);
+}
+
+.tip-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.hero-tip ul,
+.prompt-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 300px 1fr 320px;
+  gap: 18px;
+  align-items: start;
+}
+
+.sidebar {
+  display: grid;
+  gap: 18px;
+}
+
+.story-list,
+.control-fields,
+.metrics {
+  display: grid;
+  gap: 10px;
+}
+
+.story-button,
+.reset-button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.story-button {
+  padding: 14px 16px;
+  border-radius: 20px;
+  text-align: left;
+  background: linear-gradient(180deg, #fff9ef, #fff2d4);
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px rgba(31, 50, 81, 0.08);
+  font-weight: 700;
+}
+
+.story-button.active {
+  background: linear-gradient(135deg, var(--orange), #ffb14d);
+  color: #fffaf3;
+  box-shadow: 0 12px 26px rgba(240, 139, 55, 0.28);
+}
+
+.story-button:hover,
+.reset-button:hover {
+  transform: translateY(-1px);
+}
+
+.control {
+  padding: 14px;
+  border-radius: 20px;
+  background: var(--card-strong);
+  box-shadow: inset 0 0 0 1px rgba(31, 50, 81, 0.06);
+}
+
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.control-header label {
+  font-weight: 800;
+}
+
+.control-header span {
+  font-family: "Baloo 2", sans-serif;
+  color: var(--blue);
+  font-size: 20px;
+}
+
+.control input[type="range"] {
+  width: 100%;
+  accent-color: var(--orange);
+}
+
+.reset-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #eef8ff;
+  color: var(--blue);
+  box-shadow: inset 0 0 0 1px rgba(45, 125, 210, 0.12);
+  font-weight: 700;
+}
+
+.voice-card {
+  background: linear-gradient(180deg, #fff6e9, #fff1cb);
+}
+
+.kid-line {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 24px;
+  line-height: 1.5;
+}
+
+.stage-card {
+  padding: 18px;
+}
+
+.stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.stage-header h2 {
+  margin: 0;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.scene-chip {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(40, 160, 111, 0.13);
+  color: var(--green);
+  font-weight: 800;
+}
+
+.ggb-frame {
+  width: 100%;
+  min-height: 690px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #ffffff, #f9fcff);
+  box-shadow: inset 0 0 0 1px rgba(31, 50, 81, 0.06);
+}
+
+.metric {
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: inset 0 0 0 1px rgba(31, 50, 81, 0.06);
+}
+
+.metric-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.metric-value {
+  display: block;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.grownup-card {
+  background: linear-gradient(180deg, #eef8ff, #e4f4ff);
+}
+
+@media (max-width: 1180px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ggb-frame {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 860px) {
+  .page {
+    width: min(100vw - 18px, 1420px);
+    padding-top: 14px;
+  }
+
+  .hero,
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy,
+  .hero-tip,
+  .card,
+  .stage-card {
+    border-radius: 24px;
+  }
+
+  .stage-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ggb-frame {
+    min-height: 470px;
+  }
+}
