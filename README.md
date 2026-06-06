@@ -52,18 +52,27 @@ http://127.0.0.1:5000/area-limit
 http://127.0.0.1:5000/derivative-integral
 ```
 
+极值教程：
+
+```text
+http://127.0.0.1:5000/extrema
+```
+
 ## 结构说明
 
 - `app.py`: Flask 入口
 - `templates/index.html`: 页面结构与 GeoGebra 容器
 - `templates/area_limit.html`: 面积极限单独教程页面
 - `templates/derivative_integral.html`: 求导与不定积分教程页面
+- `templates/extrema.html`: 极值教程页面
 - `static/style.css`: 儿童化界面样式
 - `static/app.js`: 五个故事场景、GeoGebra API 交互、参数面板
 - `static/area-limit.js`: 面积极限教程的五幕逻辑
 - `static/area-limit.css`: 面积极限教程样式
 - `static/derivative-integral.js`: 求导与不定积分教程的八幕逻辑
 - `static/derivative-integral.css`: 求导与不定积分教程样式
+- `static/extrema.js`: 极值教程的五幕逻辑
+- `static/extrema.css`: 极值教程样式
 
 ## 建议怎么给孩子讲
 
