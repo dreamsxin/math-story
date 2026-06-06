@@ -10,11 +10,35 @@ const stepDefinitions = {
     ],
     mode: "derivative",
   },
+  average: {
+    title: "先算平均变化率",
+    chip: "割线斜率",
+    description:
+      "如果只看从 x 到 x+h 这一小段，可以先用两点连成的割线来估算变化率。这个平均变化率是：函数值增加了多少，除以横向走了多少。",
+    formula: "平均变化率 = [g(x+h)-g(x)] / h。",
+    controls: [
+      { key: "x0", label: "起点 x", min: -2.5, max: 2.5, step: 0.1, value: 1 },
+      { key: "h", label: "横向小步 h", min: 0.2, max: 2.5, step: 0.1, value: 1.5 },
+    ],
+    mode: "average",
+  },
+  limitSlope: {
+    title: "让 h 趋近 0",
+    chip: "瞬时变化率",
+    description:
+      "把 h 拖小，第二个点会向第一个点靠近，割线也越来越像切线。导函数的值，就是 h 趋近 0 时割线斜率靠近的那个数。",
+    formula: "g'(x) = lim[h→0] [g(x+h)-g(x)] / h。",
+    controls: [
+      { key: "x0", label: "观察位置 x", min: -2.5, max: 2.5, step: 0.1, value: 1 },
+      { key: "h", label: "横向小步 h", min: 0.05, max: 2, step: 0.05, value: 1 },
+    ],
+    mode: "limitSlope",
+  },
   power: {
     title: "幂函数规则",
     chip: "xⁿ 怎么求导",
     description:
-      "对 x 的 n 次方求导，指数会降下来做乘数，然后指数少 1。这是多项式求导最重要的一条规则。",
+      "幂函数规则不是凭空来的，它来自刚才的极限公式。对 xⁿ 使用 [g(x+h)-g(x)]/h，再让 h 趋近 0，就会得到 n·xⁿ⁻¹。",
     formula: "如果 g(x)=a·xⁿ，那么 g'(x)=a·n·xⁿ⁻¹。",
     controls: [
       { key: "a", label: "系数 a", min: -3, max: 3, step: 0.5, value: 2 },
@@ -147,6 +171,22 @@ function renderStep() {
 }
 
 function buildCommands(mode, values) {
+  if (mode === "average" || mode === "limitSlope") {
+    return [
+      `x0 = ${values.x0}`,
+      `h = ${values.h}`,
+      "g(x) = 0.25x^2 + 1",
+      "dg(x) = Derivative(g)",
+      "P = (x0, g(x0))",
+      "B = (x0 + h, g(x0 + h))",
+      "SecantLine = Line(P, B)",
+      "TangentLine = Tangent(P, g)",
+      "AverageSlope = Slope(SecantLine)",
+      "InstantSlope = dg(x0)",
+      "SlopeGap = abs(AverageSlope - InstantSlope)",
+    ];
+  }
+
   if (mode === "power") {
     return [
       `a = ${values.a}`,
@@ -261,6 +301,11 @@ function styleScene(api) {
     api.setColor("TangentLine", 239, 193, 75);
     api.setLineThickness("TangentLine", 5);
   } catch {}
+
+  try {
+    api.setColor("SecantLine", 39, 106, 184);
+    api.setLineThickness("SecantLine", 5);
+  } catch {}
 }
 
 function renderControls() {
@@ -313,6 +358,12 @@ function renderMetrics(mode) {
       { label: "当前函数值 g(x)", value: safeValue(api, "g(x0)") },
       { label: "当前导数值 g'(x)", value: safeValue(api, "SlopeNow") },
       { label: "规则算出的系数", value: safeValue(api, "a * n") },
+    );
+  } else if (mode === "average" || mode === "limitSlope") {
+    metrics.push(
+      { label: "平均变化率", value: safeValue(api, "AverageSlope") },
+      { label: "导函数值", value: safeValue(api, "InstantSlope") },
+      { label: "两者差多少", value: safeValue(api, "SlopeGap") },
     );
   } else if (mode === "reverse" || mode === "constant" || mode === "check") {
     metrics.push(

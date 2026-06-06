@@ -62,7 +62,7 @@ http://127.0.0.1:5000/derivative-integral
 - `static/app.js`: 五个故事场景、GeoGebra API 交互、参数面板
 - `static/area-limit.js`: 面积极限教程的五幕逻辑
 - `static/area-limit.css`: 面积极限教程样式
-- `static/derivative-integral.js`: 求导与不定积分教程的六幕逻辑
+- `static/derivative-integral.js`: 求导与不定积分教程的八幕逻辑
 - `static/derivative-integral.css`: 求导与不定积分教程样式
 
 ## 建议怎么给孩子讲
