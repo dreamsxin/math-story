@@ -1,4 +1,17 @@
 const stepDefinitions = {
+  middleSchool: {
+    title: "初中最值",
+    chip: "顶点公式",
+    description:
+      "你说得对：二次函数的最大值、最小值，初中就会用配方法或顶点公式解决。微积分不是替代它，而是解释“为什么最高或最低的地方会变平”，并把这个想法推广到更多函数。",
+    rule: "初中：配成 a(x-h)²+k，看顶点；微积分：找 f'(x)=0，再看左右是否变号。",
+    controls: [
+      { key: "a", label: "开口大小 a", min: 0.2, max: 1.5, step: 0.1, value: 0.5 },
+      { key: "h", label: "顶点横坐标 h", min: -2, max: 2, step: 0.1, value: 1 },
+      { key: "k", label: "顶点纵坐标 k", min: -1, max: 4, step: 0.1, value: 1 },
+    ],
+    mode: "middleSchool",
+  },
   sign: {
     title: "导数看方向",
     chip: "上升或下降",
@@ -59,7 +72,7 @@ const stepDefinitions = {
 const state = {
   api: null,
   app: null,
-  step: "sign",
+  step: "middleSchool",
   values: {},
 };
 
@@ -131,6 +144,27 @@ function renderStep() {
 }
 
 function buildCommands(mode, values) {
+  if (mode === "middleSchool") {
+    return [
+      `a = ${values.a}`,
+      `h = ${values.h}`,
+      `k = ${values.k}`,
+      "f(x) = a(x - h)^2 + k",
+      "df(x) = Derivative(f)",
+      "x0 = h",
+      "P = (x0, f(x0))",
+      "C = (h, k)",
+      "TangentLine = Tangent(P, f)",
+      "SlopeNow = df(x0)",
+      "MiddleSchoolMinX = h",
+      "MiddleSchoolMinY = k",
+      "DerivativeMinX = h",
+      "DerivativeMinY = f(h)",
+      "LeftTest = df(h - 1)",
+      "RightTest = df(h + 1)",
+    ];
+  }
+
   const x0 = values.x0;
 
   if (mode === "minimum") {
@@ -255,6 +289,15 @@ function renderMetrics(mode) {
       { label: "左侧导数", value: safeValue(api, "LeftTest") },
       { label: "右侧导数", value: safeValue(api, "RightTest") },
       { label: "判断", value: judgeSingle(mode, api) },
+    );
+  }
+
+  if (mode === "middleSchool") {
+    metrics.push(
+      { label: "顶点横坐标", value: safeValue(api, "MiddleSchoolMinX") },
+      { label: "顶点纵坐标", value: safeValue(api, "MiddleSchoolMinY") },
+      { label: "顶点处 f'(x)", value: safeValue(api, "SlopeNow") },
+      { label: "两种方法结论", value: "同一个最小值" },
     );
   }
 
